@@ -205,6 +205,50 @@ GENRE_PRESETS: dict[str, GenrePreset] = {
         lead_voice="pluck", bass_voice="upright", chord_voice="pluck",
         syncopation=0.2,
     ),
+    "citypop": GenrePreset(
+        name="citypop", tempo_range=(96, 112), default_mode="major", scale="major",
+        progressions=[[2, 5, 1, 6], [4, 5, 3, 6], [1, 6, 2, 5]],
+        seventh_chords=True,
+        drum=DrumPattern(
+            kick=[1,0,0,1, 0,0,1,0, 1,0,0,1, 0,0,1,0],
+            snare=[0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+            hihat=[1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],
+            swing=0.08,
+        ),
+        melody_rhythm=[0.5, 0.5, 0.75, 1.0],
+        lead_octave=5, bass_octave=2, chord_octave=4,
+        lead_voice="epiano", bass_voice="synthbass", chord_voice="epiano",
+        swing=0.08, syncopation=0.45,
+    ),
+    "jpop": GenrePreset(
+        name="jpop", tempo_range=(120, 140), default_mode="major", scale="major",
+        progressions=[[6, 4, 1, 5], [1, 5, 6, 3], [4, 5, 3, 6]],
+        seventh_chords=False,
+        drum=DrumPattern(
+            kick=[1,0,0,0, 0,0,1,0, 1,0,0,0, 0,0,1,0],
+            snare=[0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+            hihat=[1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],
+        ),
+        melody_rhythm=[0.25, 0.25, 0.5, 0.5],
+        lead_octave=5, bass_octave=2, chord_octave=4,
+        lead_voice="saw", bass_voice="synthbass", chord_voice="pad",
+        syncopation=0.3,
+    ),
+    "kpop": GenrePreset(
+        name="kpop", tempo_range=(100, 128), default_mode="natural_minor", scale="natural_minor",
+        progressions=[[6, 7, 1, 1], [1, 7, 6, 7], [6, 4, 1, 5]],
+        seventh_chords=False,
+        drum=DrumPattern(
+            kick=[1,0,0,1, 0,0,1,0, 1,0,0,0, 0,1,1,0],
+            snare=[0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+            hihat=[1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],
+            perc=[0,0,0,0, 0,0,0,1, 0,0,0,0, 0,0,0,1],
+        ),
+        melody_rhythm=[0.25, 0.5, 0.5],
+        lead_octave=5, bass_octave=2, chord_octave=4,
+        lead_voice="saw", bass_voice="synthbass", chord_voice="saw",
+        syncopation=0.35,
+    ),
 }
 
 

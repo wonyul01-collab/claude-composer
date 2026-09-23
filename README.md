@@ -32,12 +32,28 @@ python3 -m composer genres
 
 | 장르 | 분위기 |
 |---|---|
-| `lofi` | 잔잔한 로파이 힙합, 재즈 코드 + 부드럼 드럼 |
+| `lofi` | 잔잔한 로파이 힙합, 재즈 코드 + 부드러운 드럼 |
 | `pop` | 신나는 팝, 밝은 훅 |
 | `edm` | 4비트 킥의 댄스/EDM |
 | `jazz` | 스윙, 워킹 베이스, 텐션 코드 |
 | `cinematic` | 오케스트라풍 배경음악 |
 | `acoustic` | 어쿠스틱 기타 감성 |
+| `citypop` | 일본 80년대 시티팝 (펑키 베이스 + 재즈 코드 + 반짝이는 신스) |
+| `jpop` | 밝고 빠른 J-POP/애니송 스타일 |
+| `kpop` | EDM/트랩 영향의 K-POP 훅 사운드 |
+
+### 해외 음악 시장 타깃 (일본/한국/미국 등)
+
+장르를 직접 고르지 않고 국가만 정해도 된다 — 그 나라에서 잘 먹히는 장르를 자동으로 골라준다.
+
+```
+python3 -m composer markets   # 지원하는 시장과 추천 장르/가사 언어 목록
+python3 -m composer create --market japan --mood "노을 지는 퇴근길" --suno --out my_song
+```
+
+`--market japan` 을 주면 자동으로 `citypop` 장르가 선택되고, `--suno` 로 만든 프롬프트에는
+"이 시장에서는 왜 이 장르가 맞는지"를 설명하는 `[Market]` 가이드 블록과 권장 가사 언어(일본어)가
+함께 들어간다. 각 시장의 추천 근거는 [`docs/MARKETS.md`](docs/MARKETS.md) 에 정리해뒀다.
 
 ### 자주 쓰는 옵션
 
@@ -91,6 +107,7 @@ composer/
   midiwriter.py   표준 MIDI 파일(.mid)을 외부 라이브러리 없이 직접 작성
   synth.py        WAV 오디오를 외부 라이브러리 없이 직접 합성 (신스보이스 8종 + 드럼 4종)
   lyrics.py       가사 템플릿 / 섹션별 음절 수(멜로디 음표 수) 힌트
+  markets.py      국가별 타깃 시장 프로필 (추천 장르, 가사 언어, 시장 가이드)
   suno_prompt.py  Suno/Udio용 프롬프트팩 생성
   cli.py          명령줄 인터페이스 (create / genres / suno-prompt)
 tests/            unittest 기반 회귀 테스트
