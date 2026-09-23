@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from .arranger import Composition
 from .lyrics import LyricSet
+from .markets import MarketProfile
 
 STYLE_TAG_HINTS = {
     "lofi": "lo-fi hip hop, dusty vinyl crackle, mellow electric piano, boom-bap drums, chillhop",
@@ -20,13 +21,22 @@ STYLE_TAG_HINTS = {
     "jazz": "smooth jazz, walking upright bass, brushed drums, warm electric piano",
     "cinematic": "cinematic orchestral, sweeping strings, emotional, film score",
     "acoustic": "acoustic singer-songwriter, fingerstyle guitar, warm and intimate",
+    "citypop": "japanese city pop, 80s AOR, funky syncopated bass, jazzy Rhodes chords, glossy synths",
+    "jpop": "upbeat j-pop, anime opening energy, bright synth lead, dense major-key chord changes",
+    "kpop": "modern k-pop, EDM/trap-influenced production, punchy hook, synth lead, tight vocal chops",
 }
 
 
-def build_suno_prompt(comp: Composition, mood: str | None, lyrics: LyricSet | None) -> str:
+def build_suno_prompt(comp: Composition, mood: str | None, lyrics: LyricSet | None,
+                       market: MarketProfile | None = None) -> str:
     style = STYLE_TAG_HINTS.get(comp.genre, comp.genre)
     mood_part = f", {mood} mood" if mood else ""
-    lines = [f"[Style] {style}{mood_part}, key of {comp.key}, {comp.tempo} BPM", ""]
+    lines = [f"[Style] {style}{mood_part}, key of {comp.key}, {comp.tempo} BPM"]
+    if market:
+        lines.append(
+            f"[Market] {market.name_ko} 타깃 | 권장 가사 언어: {market.lyric_language} | {market.notes}"
+        )
+    lines.append("")
 
     for sec in comp.sections:
         tag = sec.name.capitalize()

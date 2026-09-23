@@ -25,6 +25,7 @@ SHORT_STRUCTURE = ["intro", "verse", "chorus", "outro"]
 BASS_STYLE_BY_GENRE = {
     "lofi": "root_fifth", "pop": "root_fifth", "edm": "four_on_floor",
     "jazz": "walk", "cinematic": "sustain", "acoustic": "root_fifth",
+    "citypop": "funk", "jpop": "root_fifth", "kpop": "four_on_floor",
 }
 # (beat_offset, chord_tone_index | 'approach', duration)
 BASS_STYLES = {
@@ -32,6 +33,7 @@ BASS_STYLES = {
     "four_on_floor": [(0.0, 0, 1.0), (1.0, 0, 1.0), (2.0, 0, 1.0), (3.0, 0, 1.0)],
     "root_fifth": [(0.0, 0, 2.0), (2.0, 2, 2.0)],
     "walk": [(0.0, 0, 1.0), (1.0, 1, 1.0), (2.0, 2, 1.0), (3.0, "approach", 1.0)],
+    "funk": [(0.0, 0, 0.5), (0.75, 2, 0.5), (1.5, 0, 0.5), (2.5, 1, 0.5), (3.0, 2, 0.5), (3.5, 0, 0.5)],
 }
 
 

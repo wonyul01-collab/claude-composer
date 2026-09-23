@@ -9,6 +9,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from composer import theory
 from composer.arranger import build_composition
 from composer.lyrics import load_lyrics_json, placeholder_lyrics, syllable_budget
+from composer.markets import MARKET_PROFILES, get_market
 from composer.midiwriter import write_midi
 from composer.suno_prompt import build_suno_prompt
 from composer.synth import render as render_wav
@@ -93,6 +94,32 @@ class LyricsSunoTests(unittest.TestCase):
         budget = syllable_budget(comp)
         section_names = {s.name for s in comp.sections}
         self.assertTrue(set(budget.keys()).issubset(section_names))
+
+
+class MarketExpansionTests(unittest.TestCase):
+    def test_new_genre_presets_generate(self):
+        for name in ("citypop", "jpop", "kpop"):
+            comp = build_composition(genre=name, seed=1, length="short")
+            self.assertGreater(comp.total_bars, 0)
+            self.assertGreater(len(comp.melody), 0)
+            self.assertGreater(len(comp.bass), 0)
+
+    def test_all_markets_have_valid_recommended_genres(self):
+        for code, m in MARKET_PROFILES.items():
+            self.assertGreater(len(m.recommended_genres), 0)
+            for g in m.recommended_genres:
+                self.assertIn(g, theory.GENRE_PRESETS, f"{code}: unknown genre {g!r}")
+
+    def test_get_market_unknown_raises(self):
+        with self.assertRaises(ValueError):
+            get_market("atlantis")
+
+    def test_suno_prompt_includes_market_block(self):
+        comp = build_composition(genre="citypop", seed=1, length="short")
+        market = get_market("japan")
+        prompt = build_suno_prompt(comp, None, placeholder_lyrics(comp), market=market)
+        self.assertIn("[Market]", prompt)
+        self.assertIn("일본어", prompt)
 
 
 if __name__ == "__main__":
