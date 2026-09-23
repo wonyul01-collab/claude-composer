@@ -1,0 +1,20 @@
+[Style] modern k-pop, EDM/trap-influenced production, punchy hook, synth lead, tight vocal chops, 설레는 밤 드라이브 mood, key of C major, 114 BPM
+[Market] 한국 타깃 | 권장 가사 언어: 한국어 | 국내는 K-POP 특유의 트랩/EDM 영향을 받은 훅 중심 구성이 강세이고, 공부·작업용 콘텐츠로는 로파이·시티팝도 꾸준히 소비된다. 가사는 한국어 후렴 반복 + 영어 훅 혼용이 흔하다.
+
+[Intro]
+(instrumental)
+
+[Verse]
+(여기에 첫 소절 가사를 적어보세요)
+(당신의 이야기를 한 줄 더)
+
+[Chorus]
+(후렴 - 가장 기억에 남는 한 줄)
+(다시 한 번 반복되는 문장)
+
+[Outro]
+(마무리하는 한 줄)
+
+--- 사용법 ---
+위 텍스트를 Suno(suno.com) 또는 Udio(udio.com)의 커스텀 모드 프롬프트/가사 칸에 그대로 붙여넣으세요.
+[Style] 줄은 스타일/프롬프트 칸에, [Verse]/[Chorus] 이하는 가사 칸에 넣으면 됩니다.
