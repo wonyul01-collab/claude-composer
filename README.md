@@ -98,6 +98,21 @@ Suno/Udio의 스타일 칸에, `[Verse]`/`[Chorus]` 이하는 가사 칸에 붙�
 Claude가 장르/분위기/조성을 해석하고, 필요하면 직접 가사를 써서 위 CLI를
 대신 실행해준다.
 
+## 다른 프로그램에서 쓰기 (Python API)
+
+`composer/api.py` 의 `compose()` 가 안정 인터페이스다 — 시그니처는 바꾸지 말고 인자만 추가할 것.
+
+```python
+from composer.api import compose
+info = compose("lofi", "out/track01", key="D minor", tempo=78, seed=7, length="full")
+# → {"wav": "out/track01.wav", "mid": "out/track01.mid", "seed": 7, "seconds": 162.1, ...}
+```
+
+**음악플레이리스트-스튜디오**(유튜브 플레이리스트 영상 제작 도구)가 이 API로 곡을 만든다.
+스튜디오의 "🎹 Suno 없이 직접 작곡" 버튼 → 곡 N개 작곡 → 권리 장부 자동 기록 →
+영상·썸네일·쇼츠·설명란 렌더까지 한 흐름으로 이어진다. 스튜디오는 이 저장소를
+자기 폴더 옆(`../claude-composer`)에서 찾는다.
+
 ## 프로젝트 구조
 
 ```
@@ -110,6 +125,7 @@ composer/
   markets.py      국가별 타깃 시장 프로필 (추천 장르, 가사 언어, 시장 가이드)
   suno_prompt.py  Suno/Udio용 프롬프트팩 생성
   cli.py          명령줄 인터페이스 (create / genres / suno-prompt)
+  api.py          다른 프로그램용 안정 API — compose()
 tests/            unittest 기반 회귀 테스트
 docs/BENCHMARKS.md  리서치한 벤치마킹 대상과 설계 근거
 .claude/skills/composer/SKILL.md   Claude Code 스킬 정의

@@ -122,5 +122,18 @@ class MarketExpansionTests(unittest.TestCase):
         self.assertIn("일본어", prompt)
 
 
+class ApiTests(unittest.TestCase):
+    def test_compose_writes_files_and_is_reproducible(self):
+        from composer.api import compose
+        with tempfile.TemporaryDirectory() as d:
+            a = compose("lofi", os.path.join(d, "a"), key="D minor", seed=5, length="short")
+            b = compose("lofi", os.path.join(d, "b"), key="D minor", seed=5, length="short")
+            self.assertTrue(os.path.getsize(a["wav"]) > 1000)
+            self.assertTrue(os.path.exists(a["mid"]))
+            self.assertEqual(a["seed"], 5)
+            with open(a["mid"], "rb") as fa, open(b["mid"], "rb") as fb:
+                self.assertEqual(fa.read(), fb.read())
+
+
 if __name__ == "__main__":
     unittest.main()
